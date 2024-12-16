@@ -23,6 +23,9 @@
             <select name="level" id="level" required autocomplete
                 class="form-select border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
                 aria-label="Default select example">
+                @if (Auth::user()->level == 'engineer')
+                <option value="engineer">Engineer</option>
+                @endif
                 <option value="admin">Admin</option>
                 <option value="bendahara">Bendahara</option>
                 <option value="kasir" selected>Kasir</option>
@@ -37,6 +40,10 @@
                 autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        </div>
+        <div class="mt-2">
+            <input type="checkbox" id="lihatPassword">
+            <label for="lihatPassword">Show Password</label>
         </div>
 
         <!-- Confirm Password -->
@@ -61,3 +68,15 @@
         </div>
     </form>
 </x-guest-layout>
+<script>
+    const passwordInput = document.getElementById('password');
+    const showPasswordCheckbox = document.getElementById('lihatPassword');
+
+    showPasswordCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            passwordInput.type = 'text';
+        } else {
+            passwordInput.type = 'password';
+        }
+    });
+</script>

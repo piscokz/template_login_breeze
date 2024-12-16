@@ -55,13 +55,14 @@ class EmergencyPasswordController extends Controller
         ]);
 
         $user = User::where('email', $request->email)->first();
+        $emergency_password = EmergencyPassword::find(1);
 
-        if ($request->emergency_password == '') {
+        if ($request->emergency_password == $emergency_password->emergency_password) {
             $user->password = Hash::make($request->new_password);
             $user->save();
-            return redirect()->route('login')->with('status', 'Password successfully reset!');
+            return redirect()->route('login')->with('status', 'Password successfully reset!')->withInput();
         }
 
-        return back()->withErrors(['emergency_password' => 'Invalid emergency password.']);
+        return back()->withErrors('Invalid emergency password.');
     }
 }

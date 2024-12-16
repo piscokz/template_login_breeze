@@ -68,6 +68,9 @@
                             <x-dropdown-link :href="route('gantiEmergencyPassword')">
                                 Ganti emergency_password
                             </x-dropdown-link>
+                            <x-dropdown-link :href="route('hapusAkunUser')">
+                                Hapus akun user
+                            </x-dropdown-link>
                         @endif
 
                         <!-- Authentication -->
